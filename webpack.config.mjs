@@ -1,5 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import VirtualModulesPlugin from "webpack-virtual-modules";
@@ -70,5 +71,11 @@ export default ({ production }) => ({
   },
   devServer: {
     hot: false,
+  },
+  optimization: {
+    minimizer: [
+      "...",
+      new CssMinimizerPlugin(),
+    ],
   },
 });

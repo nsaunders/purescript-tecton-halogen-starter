@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "bundle": "spago build --then \"webpack --env production\"",
-    "dev": "concurrently \"webpack-dev-server\" \"spago build -w\"",
-    "format": "purs-tidy format-in-place src/**/*.purs test/**/*.purs"
+    "dev": "spago build --then \"concurrently \\\"webpack-dev-server\\\" \\\"spago build -w\\\"\"",
+    "format": "purs-tidy format-in-place src test"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

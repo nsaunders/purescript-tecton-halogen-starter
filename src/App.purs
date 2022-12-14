@@ -68,30 +68,30 @@ component =
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
-    where
+  where
 
-    initialState = const 0
+  initialState = const 0
 
-    render state =
-      HH.div
-        [ HP.class_ viewport ]
-        [ HH.div
-            [ HP.class_ control ]
-            [ HH.button
-                [ HP.class_ button
-                , HE.onClick \_ -> Decrement
-                ]
-                [ HH.text "－" ]
-            , HH.div [ HP.class_ valueDisplay ] [ HH.text $ show state ]
-            , HH.button
-                [ HP.class_ button
-                , HE.onClick \_ -> Increment
-                ]
-                [ HH.text "＋" ]
-            ]
-        ]
+  render state =
+    HH.div
+      [ HP.class_ viewport ]
+      [ HH.div
+          [ HP.class_ control ]
+          [ HH.button
+              [ HP.class_ button
+              , HE.onClick \_ -> Decrement
+              ]
+              [ HH.text "－" ]
+          , HH.div [ HP.class_ valueDisplay ] [ HH.text $ show state ]
+          , HH.button
+              [ HP.class_ button
+              , HE.onClick \_ -> Increment
+              ]
+              [ HH.text "＋" ]
+          ]
+      ]
 
-    handleAction =
-      case _ of
-        Increment -> H.modify_ \s -> s + 1
-        Decrement -> H.modify_ \s -> s - 1
+  handleAction =
+    case _ of
+      Increment -> H.modify_ \s -> s + 1
+      Decrement -> H.modify_ \s -> s - 1

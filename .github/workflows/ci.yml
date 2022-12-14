@@ -20,6 +20,9 @@ jobs:
           purescript: "unstable"
           purs-tidy: "latest"
 
+      - name: Check formatting
+        run: purs-tidy check src test
+
       - name: Cache PureScript dependencies
         uses: actions/cache@v2
         with:

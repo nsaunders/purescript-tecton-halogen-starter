@@ -7,7 +7,7 @@ This starter project demonstrates one way to use [Tecton](https://github.com/nsa
 ## Scripts
 * `npm run dev` builds PureScript source code using [Spago](https://github.com/purescript/spago) in watch mode, while concurrently running the [Webpack dev server](https://webpack.js.org/configuration/dev-server/).
 * `npm run bundle` creates a production-ready application bundle using [Webpack](https://webpack.js.org).
-* `npm run format` formats the `src` and `test` directories using [purs-tidy](https://github.com/natefaubion/purs-tidy).
+* `npm run format` formats the `src` and `test` directories using [purs-tidy](https://github.com/natefaubion/purescript-tidy).
 
 ## Related
 

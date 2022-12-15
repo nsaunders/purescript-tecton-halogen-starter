@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/nsaunders/purescript-tecton-halogen-starter/workflows/CI/badge.svg?branch=master)](https://github.com/nsaunders/purescript-tecton-halogen-starter/actions?query=workflow%3ACI+branch%3Amaster)
 
-This starter project demonstrates one way to use [Tecton](https://github.com/nsaunders/purescript-tecton) and [Halogen](https://github.com/purescript-halogen/purescript-halogen) together.
+This starter project demonstrates an approach for using [Tecton](https://github.com/nsaunders/purescript-tecton) and [Halogen](https://github.com/purescript-halogen/purescript-halogen) together. CSS is authored in PureScript but "extracted" at build time to produce a static style sheet. Generating the style sheet at build time instead of runtime can avoid issues like the [flash of unstyled content (FOUC)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content), [performance overhead](https://pustelto.com/blog/css-vs-css-in-js-perf/#conclusion), and [`Content-Security-Policy` headaches](https://github.com/styled-components/styled-components/issues/887).
 
 ## Scripts
 * `npm run dev` builds PureScript source code using [Spago](https://github.com/purescript/spago) in watch mode, while concurrently running the [Webpack dev server](https://webpack.js.org/configuration/dev-server/).

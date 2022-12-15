@@ -12,10 +12,9 @@ sheet =
   renderSheet pretty do
     global
     App.css
-
-global :: CSS
-global = do
-  body ? Rule.do
-    fontFamily := sansSerif
-    backgroundColor := white
-    margin := nil
+  where
+  global = do
+    body ? Rule.do
+      fontFamily := sansSerif
+      backgroundColor := white
+      margin := nil

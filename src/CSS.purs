@@ -8,13 +8,13 @@ import Tecton (backgroundColor, body, fontFamily, margin, nil, pretty, renderShe
 import Tecton.Rule as Rule
 
 sheet :: String
-sheet =
-  renderSheet pretty do
-    global
-    App.css
-  where
-  global = do
-    body ? Rule.do
-      fontFamily := sansSerif
-      backgroundColor := white
-      margin := nil
+sheet = renderSheet pretty do
+
+  -- global styles
+  body ? Rule.do
+    fontFamily := sansSerif
+    backgroundColor := white
+    margin := nil
+
+  -- component styles
+  App.css

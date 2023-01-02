@@ -3,14 +3,16 @@ import { fileURLToPath } from "url";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import VirtualModulesPlugin from "webpack-virtual-modules";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default ({ production }) => ({
   mode: production ? "production" : "development",
   entry: {
-    app: path.resolve(__dirname, "app.virtual.mjs"),
+    app: [
+      path.resolve(__dirname, "output", "Main"),
+      path.resolve(__dirname, "output", "CSS"),
+    ],
   },
   output: {
     path: path.resolve(__dirname, "public"),
@@ -21,27 +23,6 @@ export default ({ production }) => ({
     new MiniCssExtractPlugin({
       filename: `[name]${production ? ".[contenthash]" : ""}.css`,
     }),
-    new VirtualModulesPlugin({
-      [path.resolve(__dirname, "app.virtual.css")]: `
-        module.exports = () =>
-          import("execa")
-            .then(({ execa }) => {
-              return execa(
-                "node",
-                [
-                  "-e",
-                  "import(require('path').resolve(__dirname, 'output', 'CSS', 'index.js')).then(({ sheet }) => process.stdout.write(sheet))"
-                ]
-              );
-            })
-            .then(({ stdout: code }) => ({ code }))
-      `,
-      [path.resolve(__dirname, "app.virtual.mjs")]: `
-        import "./app.virtual.css";
-        import { main } from "./output/Main/index.js";
-        main();
-      `,
-    }),
   ],
   resolve: {
     extensions: [".js", ".css"],
@@ -49,16 +30,28 @@ export default ({ production }) => ({
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /output\/Main\/index.js$/,
+        use: {
+          loader: "string-replace-loader",
+          options: {
+            search: /export\s+{[^]+}/m,
+            replace: "main()",
+          },
+        },
+      },
+      {
+        test: /output\/CSS\/index.js$/,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
+          {
+            loader: "execute-module-loader",
+            options: {
+              getResult: x => x.sheet,
+            },
+          },
         ],
-      },
-      {
-        test: path.resolve(__dirname, "app.virtual.css"),
-        use: "val-loader",
       },
       {
         test: /\.woff2?$/,

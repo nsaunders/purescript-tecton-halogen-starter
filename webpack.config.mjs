@@ -15,6 +15,7 @@ export default ({ production }) => ({
     ],
   },
   output: {
+    publicPath: "",
     path: path.resolve(__dirname, "public"),
     filename: `[name]${production ? ".[contenthash]" : ""}.js`,
   },
@@ -61,9 +62,6 @@ export default ({ production }) => ({
   },
   watchOptions: {
     aggregateTimeout: 500,
-  },
-  devServer: {
-    hot: false,
   },
   optimization: {
     minimizer: [

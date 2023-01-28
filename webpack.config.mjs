@@ -46,12 +46,7 @@ export default ({ production }) => ({
           MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
-          {
-            loader: "execute-module-loader",
-            options: {
-              getResult: x => x.sheet,
-            },
-          },
+          "execute-module-loader?export=sheet",
         ],
       },
       {
